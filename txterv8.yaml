@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: txterv8
+spec:
+  type: NodePort
+  selector:
+    app: txterv8
+  ports:
+    - name: http
+      port: 80
+      nodePort: 30080
+      protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: txterv8
+spec:
+  selector:
+    matchLabels:
+      app: txterv8
+  template:
+    metadata:
+      labels:
+        app: txterv8
+    spec:
+#      volumes:
+#        - name: config-mount
+#          hostPath:
+#            path: /Users/kerollins/go/src/gyre-plat-3181-ks-testng-local/testng/processes/keyserver-baaa/etc/opt/ionic/config
+      containers:
+        - name: txterv8
+          image: txterv8:latest
+          imagePullPolicy: Never
+#          command: ['sleep', 'infinity']
+          ports:
+            - containerPort: 80
+#          volumeMounts: # container internal directories
+#            - name: config-mount
+#              mountPath: /etc/opt/ionic/config
