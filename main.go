@@ -11,7 +11,7 @@ func main() {
 	http.HandleFunc("/hello", hello)
 
 	fmt.Printf("[main] listening...\n")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 
 	fmt.Printf("[main] end\n")
 }
