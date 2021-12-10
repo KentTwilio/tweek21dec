@@ -5,4 +5,4 @@ COPY txterv8 /opt/tweek
 WORKDIR /opt/tweek
 ENTRYPOINT ["./txterv8"]
 
-EXPOSE 80
+EXPOSE 8888

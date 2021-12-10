@@ -5,4 +5,4 @@ set -x
 
 ./build.sh
 
-docker run -p 80:80 txterv8:latest
+docker run -p 8888:8888 txterv8:latest
