@@ -4,13 +4,13 @@ kind: Service
 metadata:
   name: txterv8
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: txterv8
   ports:
-    - name: http
-      port: 80
-      nodePort: 30080
+    - port: 80
+      name: http
+      targetPort: 8888
       protocol: TCP
 ---
 apiVersion: apps/v1
@@ -26,17 +26,9 @@ spec:
       labels:
         app: txterv8
     spec:
-#      volumes:
-#        - name: config-mount
-#          hostPath:
-#            path: /Users/kerollins/go/src/gyre-plat-3181-ks-testng-local/testng/processes/keyserver-baaa/etc/opt/ionic/config
       containers:
         - name: txterv8
-          image: txterv8:latest
-          imagePullPolicy: Never
-#          command: ['sleep', 'infinity']
+          image: docker.io/kenttwilio/prime:txterv8
+          imagePullPolicy: Always
           ports:
-            - containerPort: 80
-#          volumeMounts: # container internal directories
-#            - name: config-mount
-#              mountPath: /etc/opt/ionic/config
+            - containerPort: 8888
